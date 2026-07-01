@@ -247,20 +247,6 @@ h3 {
 	padding: 10px 20px;
 }
 
-.tries-p {
-	font-size: 16px;
-	margin: 15px 0 0 0;
-	line-height: 1.5;
-	color: #fff;
-	font-size: 16px;
-}
-
-.letters-tried {
-	font-family: 'Roboto Slab', serif;
-	font-weight: bold;
-	margin-right: 5px;
-}
-
 footer {
 	background-color: #000;
 	color: #fff;
@@ -324,6 +310,62 @@ footer a:hover{
 	color: #be1c1c;
 }
 
+/* On-screen keyboard */
+#onscreen-keyboard {
+	background-color: #1a1a1a;
+	padding: 8px 6px 10px;
+	width: 100%;
+}
+
+.kb-row {
+	display: flex;
+	justify-content: center;
+	gap: 4px;
+	margin-bottom: 4px;
+}
+
+.kb-btn {
+	background-color: #555;
+	color: #fff;
+	border: none;
+	border-radius: 4px;
+	font-size: 14px;
+	font-weight: bold;
+	font-family: 'Roboto Slab', serif;
+	padding: 0;
+	width: 9%;
+	max-width: 42px;
+	aspect-ratio: 1 / 1.2;
+	cursor: pointer;
+	transition: background-color 0.15s;
+	touch-action: manipulation;
+	-webkit-tap-highlight-color: transparent;
+}
+
+.kb-btn:hover:not(:disabled) {
+	background-color: #888;
+}
+
+.kb-btn:active:not(:disabled) {
+	background-color: #aaa;
+}
+
+.kb-btn:disabled {
+	background-color: #2a2a2a;
+	color: #555;
+	cursor: default;
+}
+
+.kb-btn.kb-correct {
+	background-color: #317a27;
+	color: #fff;
+}
+
+.kb-btn.kb-incorrect {
+	background-color: #6b1010;
+	color: #555;
+}
+
 /* Media queries */
 
 @media screen and (max-width: 1200px) {
@@ -336,14 +378,19 @@ footer a:hover{
 }
 
 @media screen and (max-width: 991px) {
+	header {
+		padding: 10px;
+	}
 	h1 {
-		line-height: 1.3;
+		line-height: 1.2;
+		font-size: 1.1em;
 	}
 	.kick-icon {
 		display: none;
 	}
 	.contents-inner {
 		max-width: 500px;
+		margin: 8px 0;
 	}
 	.main-section {
 		display: none;
@@ -354,12 +401,24 @@ footer a:hover{
 	.game-container {
 		border-right: none;
 	}
+	/* Instructions banner is redundant with the visible on-screen keyboard */
 	.instructions-sm {
-		display: block;
+		display: none;
 	}
 	.get-started {
 		margin-top: 0;
 		font-size: 20px;
+	}
+	.game-display {
+		padding: 6px 14px;
+	}
+	h3 {
+		font-size: 1em;
+		margin-bottom: 2px;
+	}
+	.stats {
+		font-size: 13px;
+		padding: 6px 0;
 	}
 	footer {
 		text-align: center;
@@ -381,18 +440,40 @@ footer a:hover{
 }
 
 @media screen and (max-width: 480px) {
-	h1 {
-		font-size: 20px;
+	header {
+		padding: 8px;
 	}
-	.instructions-sm p,
+	h1 {
+		font-size: 13px;
+	}
 	.overlay-text,
 	#results {
-		font-size: 16px;
-	}
-	.stats {
 		font-size: 14px;
 	}
+	.stats {
+		font-size: 13px;
+		padding: 6px 0;
+	}
 	.answer {
-		font-size: 20px;
+		font-size: 18px;
+		letter-spacing: 7px;
+	}
+	h3 {
+		font-size: 0.8em;
+		margin-bottom: 0;
+	}
+	.kb-btn {
+		aspect-ratio: 1 / 1;
+		font-size: 13px;
+	}
+	#onscreen-keyboard {
+		padding: 5px 4px 7px;
+	}
+	.kb-row {
+		gap: 3px;
+		margin-bottom: 3px;
+	}
+	footer {
+		padding: 6px 14px;
 	}
 }

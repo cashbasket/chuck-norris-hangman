@@ -47,7 +47,6 @@ var game = {
 		$('#wins').text(this.wins);
 		$('#losses').text(this.losses);
 		$('#maxTriesText').text(this.maxTries + ' times');
-		$('#tries').text('None').addClass('yellow');
 		$('#results').hide();
 		$('#fact').html(factHeader + '<br>' + this.getRandomFact())
 				  .fadeIn(200);
@@ -109,20 +108,18 @@ var game = {
 		}
 		$('#word').text(displayed);
 
-		// update tried characters display
+		// track tried characters
 		if (!this.isWinner()) {
-			if($('#tries').text() == 'None') {
-				$('#tries').text('').removeClass('yellow');
-			} 
-			if(this.triedLetters.length >= 1) {
-				$('#tries').append(', ');
-			}
-			$('#tries').append(guess.toUpperCase());
 			this.triedLetters.push(guess.toUpperCase());
 		}
 		$('#gameDisplay').removeClass('pulsate');
 
+		// mark the on-screen keyboard button
+		var $btn = $('.kb-btn[data-key="' + guess.toUpperCase() + '"]');
+		$btn.prop('disabled', true);
+
 		if(!correctGuess) {
+			$btn.addClass('kb-incorrect');
 			this.openCurtain();
 			if(this.triesLeft > 1) {
 				this.playSound('incorrect');
@@ -134,6 +131,7 @@ var game = {
 			}
 		}
 		else {
+			$btn.addClass('kb-correct');
 			this.correctGuesses++;
 			//don't play the 'correct' sound for the last remaining guess. Otherwise, it creates a conflict with the 'victory' sound and throws a JS error.
 			if(this.uniqueChars.length != this.correctGuesses) {
@@ -239,8 +237,9 @@ var game = {
 		this.correctGuesses = 0;
 		$('#word').text('');
 		$('#gameDisplay').addClass('pulsate');
-		$('#tries').text('None').addClass('yellow');
 		$('#fact').html(factHeader + '<br>' + this.getRandomFact()).fadeIn(200);
+		// re-enable all on-screen keyboard buttons
+		$('.kb-btn').prop('disabled', false).removeClass('kb-correct kb-incorrect');
 		//don't forget to reset Chuck!
 		$('#imgContainer').css('left','0');
 		//choose new word
@@ -304,6 +303,17 @@ var game = {
 $(document).ready(function () {
 	// initialize game
 	game.init();
+
+	$(document).on('click', '.kb-btn', function() {
+		var key = $(this).data('key');
+		if (game.performGuess(key.charCodeAt(0))) {
+			setTimeout((function() {
+				$('#overlay').stop().animate({maxWidth: '100%'}, 500, function() {
+					game.reset();
+				});
+            }), 5200);
+		}
+	});
 
 	$(document).on('keyup', function(event) {
 		//performGuess returns whether or not the game is over after the key is pressed
