@@ -383,7 +383,7 @@ footer a:hover{
 	}
 	h1 {
 		line-height: 1.2;
-		font-size: 1.1em;
+		font-size: 1.4em;
 	}
 	.kick-icon {
 		display: none;
@@ -413,11 +413,11 @@ footer a:hover{
 		padding: 6px 14px;
 	}
 	h3 {
-		font-size: 1em;
+		font-size: 1.1em;
 		margin-bottom: 2px;
 	}
 	.stats {
-		font-size: 13px;
+		font-size: 15px;
 		padding: 6px 0;
 	}
 	footer {
@@ -444,14 +444,14 @@ footer a:hover{
 		padding: 8px;
 	}
 	h1 {
-		font-size: 13px;
+		font-size: 16px;
 	}
 	.overlay-text,
 	#results {
 		font-size: 14px;
 	}
 	.stats {
-		font-size: 13px;
+		font-size: 14px;
 		padding: 6px 0;
 	}
 	.answer {
@@ -459,7 +459,7 @@ footer a:hover{
 		letter-spacing: 7px;
 	}
 	h3 {
-		font-size: 0.8em;
+		font-size: 0.9em;
 		margin-bottom: 0;
 	}
 	.kb-btn {
